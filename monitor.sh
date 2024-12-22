@@ -7,7 +7,7 @@ trap 'kill $!; exit' SIGINT SIGTERM SIGHUP SIGABRT EXIT
 ./go2rtc_linux_arm64 &
 
 echo ""
-echo "http://pidev:1984/stream.html?src=usbcam&mode=mse"
+echo "http://$(hostname):1984/stream.html?src=usbcam&mode=mse"
 echo ""
 
 # Wait for the background process to finish
