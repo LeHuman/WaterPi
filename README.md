@@ -55,12 +55,13 @@ Direct python script functionality will not be covered, run `python3 water.py --
 
 |script|function|
 |------|--------|
-| water.sh | Enable water pump for how every many `ms` as defined in this bash script |
-| heater_on.sh | Enable heater |
-| heater_off.sh | Disable heater |
-| kill.sh | Cut all power including main |
-| restore.sh | Restore main power |
-| monitor.sh | Turn on webcam stream |
+| `./water.sh` | Enable water pump for how every many `ms` as defined in this bash script |
+| `./heater_on.sh` | Enable heater |
+| `./heater_off.sh` | Disable heater |
+| `./kill.sh` | Cut all power including main |
+| `./restore.sh` | Restore main power |
+| `./status.sh` | Restore main power |
+| `./monitor.sh &` | Turn on webcam stream (rec put in bg) |
 
 > [!IMPORTANT]
 > If anything goes wrong (or if you called `kill.sh`) you must call `restore.sh`, as main power will have been cut. If there is a file called `fail` in this directory, something went wrong and the main scripts will not run. Additionally, everything will (*should*) have been turned off.
