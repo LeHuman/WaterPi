@@ -1,0 +1,6 @@
+streams:
+  usbcam:
+  - ffmpeg:device?video=0&video_size=1280x720&framerate=30&g=30&profile:v=high&level:v=4.1&preset:v=superfast&tune:v=zerolatency#video=h264#hardware#rotate=90
+  - ffmpeg:device?audio=default&channels=1&sample_rate=16000#audio=aac
+  # webcam:
+  # - exec:ffmpeg -hide_banner -v error -f v4l2 -framerate 30 -video_size 1280x720 -i /dev/video0 -f alsa -i default -c:v libx264 -g 30 -profile:v high -level:v 4.1 -preset:v superfast -tune:v zerolatency -pix_fmt yuv420p -c:a aac -b:a 128k -user_agent ffmpeg/go2rtc -rtsp_transport tcp -f rtsp {output}
