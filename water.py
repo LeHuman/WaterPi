@@ -1,3 +1,5 @@
+"""Remotely water a plant on a Raspberry Pi 5"""
+
 import os
 import subprocess
 import time
