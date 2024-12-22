@@ -88,6 +88,7 @@ for device in DEVICES.values():
 
 def enable_device(device_name: str):
     """Enables the specified device by toggling its GPIO pins."""
+    print(f"> {colored('Enabling', 'green')} {colored(device_name, 'white', attrs=['bold'])}")
     try:
         device = DEVICES[device_name]
 
@@ -103,6 +104,7 @@ def enable_device(device_name: str):
 
 def disable_device(device_name: str):
     """Disables the specified device by toggling its GPIO pins."""
+    print(f"> {colored('Disabling', 'red')} {colored(device_name, 'white', attrs=['bold'])}")
     try:
         device = DEVICES[device_name]
 
@@ -118,7 +120,11 @@ def disable_device(device_name: str):
 
 def enable_device_for(device_name: str, duration_ms: int):
     """Enables a device for a specified duration in milliseconds."""
+    cprint(
+        f"Triggering {colored(device_name, 'white', attrs=['bold'])} {colored(f'for {duration_ms}ms', 'green')}", 'green')
     try:
+        disable_device(device_name)
+        time.sleep(0.25)  # ~250ms delay
         enable_device(device_name)
         time.sleep(duration_ms / 1000.0)  # Convert ms to seconds
     except Exception as e:
@@ -178,7 +184,7 @@ def start_watchdog(timeout_ms: int) -> str:
             eprint("Failed to create watchdog in time")
             fallback_disable_all()
 
-    cprint(f"Watchdog created for {timeout}s", 'yellow')
+    cprint(f"Watchdog created for {timeout}s", 'magenta')
 
     return pipe_path
 
@@ -241,13 +247,7 @@ def main():
         fallback_disable_all()
         errored = True
     finally:
-        if args.command == "enable_for":
-            try:
-                disable_device(args.device)
-            except Exception as cleanup_error:
-                eprint(f"Error during final cleanup of {args.device}: {cleanup_error}")
-                fallback_disable_all()
-        elif not errored:
+        if not errored:
             dprint("Leaving devices in their current state.")
     cprint("Done! 💧", 'blue', attrs=['bold'])
 
