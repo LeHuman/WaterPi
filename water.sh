@@ -1,1 +1,1 @@
-python3 water.py enable_for pump 10000
+python3 water.py enable_for pump 15000
